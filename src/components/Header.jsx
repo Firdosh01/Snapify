@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import axios from 'axios'
+import Pagination from './Pagination';
 
 const API_URL = 'https://api.unsplash.com/search/photos';
 const IMAGES_PER_PAGE = 20;
@@ -10,8 +11,8 @@ export default function Header() {
   const searchInput = useRef(null);
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [errorMsg, setErrorMsg] = useState('');
-  console.log(process.env.REACT_APP_API_KEY)
   console.log(page)
 
 
@@ -26,6 +27,7 @@ export default function Header() {
         );
 
         setImages(data.results);
+        setTotalPages(data.total_pages);
       }
     } catch (error) {
       setErrorMsg('Error fetching images. Try again later.');
@@ -69,10 +71,35 @@ export default function Header() {
         </div>
 
         <div className='flex flex-row gap-5 mt-4'>
-          <button className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' onClick={() => handleSelection('nature')}>Nature</button>
-          <button className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' onClick={() => handleSelection('birds')}>Birds</button>
-          <button className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' onClick={() => handleSelection('cats')}>Cats</button>
-          <button className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' onClick={() => handleSelection('shoes')}>Shoes</button>
+          
+          <button 
+          className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' 
+          onClick={() => handleSelection('nature')}
+          >
+            Nature
+          </button>
+          
+          <button 
+          className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' 
+          onClick={() => handleSelection('birds')}
+          >
+            Birds
+          </button>
+          
+          <button 
+          className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' 
+          onClick={() => handleSelection('cats')}
+          >
+            Cats
+          </button>
+          
+          <button 
+          className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' 
+          onClick={() => handleSelection('shoes')}
+          >
+            Shoes
+          </button>
+          
         </div>
 
       </div>
@@ -87,12 +114,12 @@ export default function Header() {
                   src={image.urls.full}
                   alt={image.alt_description}
                   className='w-full rounded-lg shadow-md h-72'
-                />
+                  />
               ))}
           </div>
         }
       </div>
-
+         <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   )
 }
