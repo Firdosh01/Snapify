@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.search-section .search-input {
+    min-width: 500px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    user-select: none;
+    border-radius: 2px;
+}
+
+.btn{
+    background-color: blue;
+    padding: 2px 10px;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 10px;
+}

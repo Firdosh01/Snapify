@@ -66,6 +66,7 @@ export default function Header() {
             <input type='search'
               placeholder='Type something to search...'
               ref={searchInput}
+              className='search-input'
             />
           </form>
         </div>
@@ -113,7 +114,7 @@ export default function Header() {
                   key={image.id}
                   src={image.urls.full}
                   alt={image.alt_description}
-                  className='w-full rounded-lg shadow-md h-72'
+                  className='object-cover w-full rounded-lg shadow-md h-72'
                   />
               ))}
           </div>
