@@ -76,7 +76,7 @@ export default function Header() {
           </form>
         </div>
 
-        <div className='flex flex-row gap-5 mt-4'>
+        <div className='flex-row hidden gap-5 mt-4 object md:flex'>
           
           <button 
           className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' 
