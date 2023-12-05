@@ -16,7 +16,6 @@ export default function Header() {
   const [totalPages, setTotalPages] = useState(0);
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false)
-  console.log(page)
 
 
   const fetchImages = useCallback(async () => {
@@ -64,8 +63,6 @@ export default function Header() {
       <div className='flex flex-col items-center py-10 bg-gray-900'>
 
         <h1 className='text-2xl font-bold text-white '>Image Search</h1>
-        {errorMsg && <p className='error-msg'>{errorMsg}</p>}
-
         <div className='mt-4 search-section'>
           <form onSubmit={handleSearch}>
             <input type='search'
@@ -79,28 +76,28 @@ export default function Header() {
         <div className='flex-row hidden gap-5 mt-4 object md:flex'>
           
           <button 
-          className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' 
+          className='w-[100px] text-center text-white bg-blue-600 rounded-md py-2' 
           onClick={() => handleSelection('nature')}
           >
             Nature
           </button>
           
           <button 
-          className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' 
+          className='w-[100px] text-center text-white bg-blue-600 rounded-md py-2' 
           onClick={() => handleSelection('birds')}
           >
             Birds
           </button>
           
           <button 
-          className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' 
+          className='w-[100px] text-center text-white bg-blue-600 rounded-md py-2' 
           onClick={() => handleSelection('cats')}
           >
             Cats
           </button>
           
           <button 
-          className='px-3 py-1 text-center text-white bg-blue-600 rounded-md' 
+          className='w-[100px] text-center text-white bg-blue-600 rounded-md py-2' 
           onClick={() => handleSelection('shoes')}
           >
             Shoes
@@ -109,20 +106,24 @@ export default function Header() {
         </div>
 
       </div>
+      
+      {errorMsg && <p className='pt-5 font-serif text-center error-msg'>{errorMsg}</p>}
 
       <div>
         {
-          loading ? <Spinner /> :
+          loading && !errorMsg ? <Spinner /> :
 
           <div className='grid gap-4 px-4 mx-auto my-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-7xl'>
             {
-              images.map((image, index) => (
-                <Images image={image} index={index} />
+              images.map((image) => (
+                <Images image={image} />
               ))}
           </div>
         }
       </div>
-         <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+         {
+          !loading && <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+         }
     </div>
   )
 }
