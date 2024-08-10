@@ -51,11 +51,6 @@ export default function Header() {
     resetSearch();
   };
 
-  const handleSelection = (selection) => {
-    searchInput.current.value = selection;
-    resetSearch();
-  };
-
   return (
     <div>
       <div className="flex flex-col items-center py-10 bg-gray-900">
@@ -67,6 +62,7 @@ export default function Header() {
               placeholder="Type something to search..."
               ref={searchInput}
               className="search-input"
+              
             />
           </form>
         </div>
