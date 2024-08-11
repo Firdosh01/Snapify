@@ -54,7 +54,7 @@ export default function Header() {
   return (
     <div>
       <div className="flex flex-col items-center py-10 bg-gray-900">
-        <h1 className="text-xl font-bold text-white ">Search stunning photos in seconds</h1>
+        <h1 className="text-xl font-bold text-white  font-mono">Search stunning photos in seconds</h1>
         <div className="mt-4 search-section">
           <form onSubmit={handleSearch}>
             <input
@@ -66,7 +66,6 @@ export default function Header() {
             />
           </form>
         </div>
-
       </div>
 
       {errorMsg && (
