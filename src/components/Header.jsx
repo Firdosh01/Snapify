@@ -9,50 +9,50 @@ const API_URL = "https://api.unsplash.com/search/photos";
 const IMAGES_PER_PAGE = 20;
 
 export default function Header() {
+  const searchInput = useRef(null);
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("mountain")
-  // console.log("process.env.REACT_APP_API_KEY", process.env.REACT_APP_API_KEY);
+  const [searchQuery, setSearchQuery] = useState("mountain"); 
 
   const fetchImages = useCallback(async () => {
     try {
-      if (searchQuery !== "") {
+      if (searchQuery.trim() !== "") {
         setLoading(true);
         setErrorMsg("");
-  
         const { data } = await axios.get(
           `${API_URL}?query=${searchQuery}&page=${page}&per_page=${IMAGES_PER_PAGE}&client_id=${process.env.REACT_APP_API_KEY}`
         );
-        setImages(data.results);
-        setTotalPages(data.total_pages);
         if (data.results.length === 0) {
           setErrorMsg("No images found for your search query.");
           setImages([]);
           setTotalPages(0);
-        } 
+        } else {
+          console.log("data", data)
+          setImages(data.results);
+          setTotalPages(data.total_pages);
+        }
         setLoading(false);
       }
     } catch (error) {
       setErrorMsg("Error fetching images. Try again later.");
-      console.log("error", error);
+      console.log("Error:", error);
       setLoading(false);
     }
-  }, [page, searchQuery]);
-  
+  }, [searchQuery, page]);
 
   useEffect(() => {
     fetchImages();
-    setPage(1);
-  }, []);
+  }, [fetchImages]);
 
   const handleSearch = (event) => {
     event.preventDefault();
-    fetchImages();
-    setPage(1);
+    setSearchQuery(searchInput.current.value);
+    setPage(1); 
   };
+
 
   return (
     <div>
@@ -75,10 +75,10 @@ export default function Header() {
             <input
               type="search"
               placeholder="Type something to search..."
-              // ref={searchInput}
-              onChange={(e) => {
-                setSearchQuery(e.target.value)
-              }}
+              ref={searchInput}
+              // onChange={(e) => {
+              //   setSearchQuery(e.target.value)
+              // }}
               className="search-input"
             />
           </form>
