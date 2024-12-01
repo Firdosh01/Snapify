@@ -4,7 +4,7 @@ export default function Images({ image }) {
   return (
     <div
       key={image.id}
-      className="w-full h-full"
+      className="w-full h-full image-container"
     >
       <img
         src={image.urls.small_s3}

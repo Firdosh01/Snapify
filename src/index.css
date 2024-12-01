@@ -10,12 +10,12 @@
 }
 
 .search-section .search-input {
-  min-width: 500px;
+  min-width: 600px;
   padding: 10px 20px 10px 20px;
   border: none;
   outline: none;
   user-select: none;
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 .btn {
@@ -94,8 +94,8 @@
 
 @media (max-width: 480px) {
   .search-section .search-input {
-    width: 100%;
-    min-width: unset;
+    min-width: 100px;
+    width: 90%;
     margin: 0 5px;
   }
 }
