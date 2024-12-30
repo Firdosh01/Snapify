@@ -65,7 +65,7 @@ export default function Header() {
         }}
       >
        <div className="h-full w-full flex flex-col justify-end items-center">
-        <div className="mt-4 search-section">
+        <div className="mt-4 search_section">
           <div className="px-2 pb-2">
          <h1 className="md:text-5xl text-4xl font-bold text-white font-mono">Snapify</h1>
          <h1 className="md:text-base text-sm font-bold text-white  font-mono">Unleash the power of pixels.</h1>
@@ -79,7 +79,7 @@ export default function Header() {
               // onChange={(e) => {
               //   setSearchQuery(e.target.value)
               // }}
-              className="search-input"
+              className="search__input"
             />
           </form>
         </div>
