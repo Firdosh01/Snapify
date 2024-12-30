@@ -38,7 +38,7 @@ export default function Images({ image }) {
                 <div className=" bg-white rounded px-3 py-2 cursor-pointer download_image_btn">
                    <FaArrowDownLong />
                 </div>
-              </div>
+              </div>AA
             </div>
           </div>
         </div>
