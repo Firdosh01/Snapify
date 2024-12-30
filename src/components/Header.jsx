@@ -15,7 +15,7 @@ export default function Header() {
   const [totalPages, setTotalPages] = useState(0);
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("mountain"); 
+  const [searchQuery, setSearchQuery] = useState("mountain");
 
   const fetchImages = useCallback(async () => {
     try {
@@ -25,12 +25,13 @@ export default function Header() {
         const { data } = await axios.get(
           `${API_URL}?query=${searchQuery}&page=${page}&per_page=${IMAGES_PER_PAGE}&client_id=${process.env.REACT_APP_API_KEY}`
         );
+
         if (data.results.length === 0) {
           setErrorMsg("No images found for your search query.");
           setImages([]);
           setTotalPages(0);
         } else {
-          console.log("data", data)
+          console.log("data", data);
           setImages(data.results);
           setTotalPages(data.total_pages);
         }
@@ -50,40 +51,46 @@ export default function Header() {
   const handleSearch = (event) => {
     event.preventDefault();
     setSearchQuery(searchInput.current.value);
-    setPage(1); 
+    setPage(1);
   };
-
 
   return (
     <div>
-      <div className="flex flex-col items-center py-10 bg-gray-900 md:h-[350px]"
-         style={{
+      <div
+        className="flex flex-col items-center py-10 bg-gray-900 md:h-[350px]"
+        style={{
           backgroundImage: `url('./unsplash-img.png')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          width: '100%',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          width: "100%",
         }}
       >
-       <div className="h-full w-full flex flex-col justify-end items-center">
-        <div className="mt-4 search_section">
-          <div className="px-2 pb-2">
-         <h1 className="md:text-5xl text-4xl font-bold text-white font-mono">Snapify</h1>
-         <h1 className="md:text-base text-sm font-bold text-white  font-mono">Unleash the power of pixels.</h1>
-         <h1 className="md:text-base text-sm font-bold text-white  font-mono">Your next idea starts with the perfect image.</h1>
+        <div className="h-full w-full flex flex-col justify-end items-center">
+          <div className="mt-4 search_section">
+            <div className="px-2 pb-2">
+              <h1 className="md:text-5xl text-4xl font-bold text-white font-mono">
+                Snapify
+              </h1>
+              <h1 className="md:text-base text-sm font-bold text-white  font-mono">
+                Unleash the power of pixels.
+              </h1>
+              <h1 className="md:text-base text-sm font-bold text-white  font-mono">
+                Your next idea starts with the perfect image.
+              </h1>
+            </div>
+            <form onSubmit={handleSearch}>
+              <input
+                type="search"
+                placeholder="Type something to search..."
+                ref={searchInput}
+                // onChange={(e) => {
+                //   setSearchQuery(e.target.value)
+                // }}
+                className="search__input"
+              />
+            </form>
           </div>
-          <form onSubmit={handleSearch}>
-            <input
-              type="search"
-              placeholder="Type something to search..."
-              ref={searchInput}
-              // onChange={(e) => {
-              //   setSearchQuery(e.target.value)
-              // }}
-              className="search__input"
-            />
-          </form>
         </div>
-       </div>
       </div>
 
       {errorMsg && (
@@ -94,10 +101,9 @@ export default function Header() {
         {loading && !errorMsg ? (
           <Spinner />
         ) : (
-          <div >
+          <div>
             <ResponsiveMasonry
               columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
-              
             >
               <Masonry>
                 {images.map((image) => (
